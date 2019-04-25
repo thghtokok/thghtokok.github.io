@@ -1,0 +1,41 @@
+body{
+    -moz-user-select: none;
+    
+}
+
+table {
+    border: 1px solid #000;
+    border-radius:2%;
+    cursor: default!important;
+}
+
+button{
+    height: 40px;
+    width: 300px;
+}
+
+td {
+    border-radius:20%;
+    height: 30px;
+    width: 30px;
+    margin: 2px;
+    text-align: center;
+}
+
+.weizhi {
+    background-color: #f3f3f3;
+}
+
+.lei {
+    background-color: #ff0000;
+}
+.cuowu{
+    background-color: #707700;
+}
+.qizi {
+    background-color: #ffff00;
+}
+.anquan{
+    color: white;
+    background-color: #092b0e;
+}
