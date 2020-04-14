@@ -8,6 +8,7 @@
 ---
 
 * [git分支说明](./pdf/git分支说明.pdf)
+* [Mysql 索引规则](./md/Mysql索引规则.md)
 
 ---
 
