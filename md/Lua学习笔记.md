@@ -2,13 +2,13 @@
 
 对程序效率的测试！
 ```lua
-x = os.clock()   --开始计时
-print(os.time())   --可有可无的时间戳
-for i=1 ,10000000 do  --运行次数
---a(event)  --函数A
-b(event)   --函数B
+x = os.clock()     --开始计时
+print(os.time())   --可有可无的时间戳
+for i=1 ,10000000 do  --运行次数
+--a(event)  --函数A
+b(event)   --函数B
 end
-print(string.format("elapsed time: %.2f\n" , os.clock() - x))  --展示结果
+print(string.format("elapsed time: %.2f\n" , os.clock() - x))  --展示结果
 ```
 
 ## Hello World
@@ -22,11 +22,11 @@ print("Hello World")
 
 ```lua
 function fact(n)
-     if n==0 then
-          return 1
-     else
-          return n*fact(n-1)
-     end
+     if n==0 then
+          return 1
+     else
+          return n*fact(n-1)
+     end
 end
 
 print("enter a number:")
@@ -44,7 +44,7 @@ print(fact(a))
 a=1 b=a*2
 print(a,b) --这样显示系统会自动加\t
 ```
-> 1     2
+> 1     2
 
 * 在程序中使用dofile("文件A")来把文件A包含到当前文件中。 
 
@@ -52,13 +52,13 @@ print(a,b) --这样显示系统会自动加\t
 --file 'a.lua'
 --求斜边长
 function norm (x,y)
-     local n2 = x^2 + y^2
-     return math.sqrt(n2)
+     local n2 = x^2 + y^2
+     return math.sqrt(n2)
 end
 
 --求倍数
 function twice(x)
-     return 2*x
+     return 2*x
 end
 --file 'b.lua'
 dofile("a.lua")
@@ -67,7 +67,7 @@ print(twice(n))
 ```
 
 >10
- 
+ 
 * 全局变量在没有赋值之前是nil类型，
   * 一个变量只有不等于nil的时候才是存在的
 
@@ -112,7 +112,7 @@ print(b)
 
 ### Lua是大小写敏感的
 ### 单行注释： --
-### 多行注释：--[[    --]]
+### 多行注释：--[[    --]]
 
 ### 命令行方式
 
@@ -121,12 +121,12 @@ lua [options] [script[args]]
 -e 直接报命令传入Lua
 D:\StudentFile\Luaxuexi>lua -e "print(math.sin(12))"
 -0.53657291800043
--l  L  加载文件，就是把几个文件连起来
--i  进入交互模式
+-l  L  加载文件，就是把几个文件连起来
+-i  进入交互模式
 _PROMPT 可以改变交互模式的提示符
 lua -i -e "_PROMPT=' Lua>'"
 D:\StudentFile\Luaxuexi>lua -i -e "_PROMPT=' Lua>'"
-Lua 5.1.4  Copyright (C) 1994-2008 Lua.org, PUC-Rio
+Lua 5.1.4  Copyright (C) 1994-2008 Lua.org, PUC-Rio
 Lua>
 ```
 
@@ -137,7 +137,7 @@ Lua>
 | -------- | ----------------------------------------- |
 | nil      | 为赋值的全局变量                          |
 | boolean  | true、false、除了false和nil其他的值都是真 |
-| number   | 所有的数都是实数  4.57e-3                 |
+| number   | 所有的数都是实数  4.57e-3                 |
 | string   | 用单引号，或者双引号括起来的              |
 | userdata | 外来数据类型                              |
 | function | 可以存入变量                              |
@@ -229,17 +229,17 @@ print("hello"+1)
 > 10+1
 > lua: b.lua:4: attempt to perform arithmetic on a string value
 
-* **注意： 10 == "10" 是false**
+* **注意： 10 == "10" 是false**
 把string转换成number
-tonumber()  如果字符串不是数字，返回nil
+tonumber()  如果字符串不是数字，返回nil
 
 ```lua
 line = io.read()
 n = tonumber(line)
 if n == nil then
-     error(line .. " is not a valid number")
+     error(line .. " is not a valid number")
 else
-     print(n*2)
+     print(n*2)
 end
 ```
 
@@ -277,13 +277,13 @@ userdata用来描述应用程序或者使用C实现的库创建的新类型。
 ### 3.1 算术运算符
 
 二元运算符: + - * / ^ (加减乘除幂)
-一元运算符：-  (负值)
+一元运算符：-  (负值)
 这些运算符的操作数都是实数
 
 ### 3.2 关系运算符
-<  >  <=  >=  == ~=
+<  >  <=  >=  == ~=
 返回结构为false或者true
-==  和  ~=  比较两个值，如果两个值类型不同，Lua认为两者不同
+==  和  ~=  比较两个值，如果两个值类型不同，Lua认为两者不同
 nil之和自己相等
 Lua比较引用类型如tables、userdata、functions时，只有当且仅当两者表示同一个对象时才相等
 
@@ -300,17 +300,17 @@ print(a==c,a~=b)
 > true
 > false
 > false
-> true     true
+> true     true
 
 Lua比较数字按传统的数字大小进行
 比较字符串按照字母的顺序进行，但是字母顺序依赖本地环境
 比较不同类型的值是要特别注意
 
 ```lua
-print("0" == 0)  --不同类型相等一律false
-print(2<15)  --数字大小比较
-print("2">"15")  --字符串顺序比较
-print(2>"15")  --不同类型比较一律报错
+print("0" == 0)  --不同类型相等一律false
+print(2<15)  --数字大小比较
+print("2">"15")  --字符串顺序比较
+print(2>"15")  --不同类型比较一律报错
 ```
 > false
 > true
@@ -318,20 +318,20 @@ print(2>"15")  --不同类型比较一律报错
 > lua: b.lua:4: attempt to compare string with number
 
 ### 3.3 逻辑运算符
-and  or  not
+and  or  not
 1. 认为false和nil是假（false）,其他的都是真，0也是真
 * **注意：and和or的运算结果不是true和false，而是两个操作数之中的一个**
 
 and和or的返回规则：
-* a and b  --如果a为false，则返回a，否则返回b
+* a and b  --如果a为false，则返回a，否则返回b
 * a or b --如果a为true，则返回a，否则返回b
 例如：
 ```lua
 print(3 and 5) --3是真 and 返回5
 print(nil and 5) --nil是假 and 返回nil
 print(false and 5) --false是假 and 返回false
-print(4 or 5)  --4是真 or 返回4
-print(false or 5)  --flase是假 or 返回5
+print(4 or 5)  --4是真 or 返回4
+print(false or 5)  --flase是假 or 返回5
 ```
 > 5
 > nil
@@ -340,13 +340,13 @@ print(false or 5)  --flase是假 or 返回5
 > 5
 
 #### 小技巧：
-> x = x or v  --单例模式
+> x = x or v  --单例模式
 > 等价于
 > if not x then
->    x = v
+>    x = v
 > end
 
-* **注意 ： and 的优先级 比 or 高**
+* **注意 ： and 的优先级 比 or 高**
 
 * C语言中的三元运算符
 a ? b : c
@@ -367,7 +367,7 @@ print(a and b or c)
 就是逻辑取反
 
 ### 3.4 连接运算符
-* ..  --两个点
+* ..  --两个点
 字符串的连接，如果操作数为数字，Lua将数字转成字符串
 ```lua
 print("Hello " .. "world")
@@ -382,30 +382,30 @@ print(0 .. 1)
 | 顺序 | 运算符              | 说明         |
 | ---- | ------------------- | ------------ |
 | 高   | ^                   | 幂           |
-|      | not  -              | 逻辑反，负值 |
+|      | not  -              | 逻辑反，负值 |
 |      | %                   | 取余         |
-|      | *    /              | 乘   除      |
-|      | +  -                | 加   减      |
+|      | *    /              | 乘   除      |
+|      | +  -                | 加   减      |
 |      | ..                  | 连接符       |
-|      | <  > <=  >=  ~=  == | 关系运算符   |
+|      | <  > <=  >=  ~=  == | 关系运算符   |
 |      | and                 |
 | 低   | or                  |
 
 ```lua
-print ( 5^6 %3 , 5^ 6, 15625% 3)   --说明^的优先级比%高
-print ( 6%3 ^5 , 6% 3)
+print ( 5^6 %3 , 5^ 6, 15625% 3)   --说明^的优先级比%高
+print ( 6%3 ^5 , 6% 3)
 ```
-> 1        15625 1
-> 6        0
+> 1        15625 1
+> 6        0
 ```lua
-print ( 5*6 %3 )   --说明%的优先级比* , /高
-print ( 6%3 *5 )
+print ( 5*6 %3 )   --说明%的优先级比* , /高
+print ( 6%3 *5 )
 ```
 > 0
 > 0
 ```lua
-print (- 1 % 5)  --说明not ,符号 的优先级比%高
-print (- ( 1 % 5))
+print (- 1 % 5)  --说明not ,符号 的优先级比%高
+print (- ( 1 % 5))
 ```
 > 4
 > -1
@@ -429,7 +429,7 @@ print(days[1])
 tab = {print(1),math.sin(2),math.sin(4)}
 还可以把数组定义成一个实例一样的东西
 
-tab = {x=1,y=2} 
+tab = {x=1,y=2} 
 --或者写成 tab = {}; a.x=1;a.y=2
 print(tab.x)
 
@@ -465,7 +465,7 @@ x.f=w
 print(w["x"])
 print(w[1])
 print(x.f[1])
-w.x = nil   --删掉一个元素
+w.x = nil   --删掉一个元素
 ```
 
 每次调用构造函数，Lua都会创建一个新的table ，可以使用table构造一个list链表
@@ -473,14 +473,14 @@ w.x = nil   --删掉一个元素
 --制造链表，输入quit结束
 list = nil
 for line in io.lines() do
-     if line == "quit" then break end
-     list = {next = list , value = line}
+     if line == "quit" then break end
+     list = {next = list , value = line}
 end
 --输出链表
 l = list
 while l do
-     print(l.value)
-     l = l.next
+     print(l.value)
+     l = l.next
 end
 ```
 > 1
@@ -501,28 +501,28 @@ listH = nil
 listW = nil
 a = 1
 for line in io.lines() do
-     if line == "quit" then break end
+     if line == "quit" then break end
 
-     listW = {last = listW, value = line,next = nil}
-     if listW.last ~= nil then
-          listW.last.next = listW
-     end
-     if a == 1 then
-          listH = listW
-          a = 2
-     end
+     listW = {last = listW, value = line,next = nil}
+     if listW.last ~= nil then
+          listW.last.next = listW
+     end
+     if a == 1 then
+          listH = listW
+          a = 2
+     end
 end
 print("从头开始")
 l = listH
 while l do
-     print(l.value)
-     l = l.next
+     print(l.value)
+     l = l.next
 end
 print("从尾开始")
 l = listW
 while l do
-     print(l.value)
-     l = l.last
+     print(l.value)
+     l = l.last
 end
 ```
 
@@ -554,18 +554,18 @@ color = "blue", thickness = 2, nopints = 4,
 
 i = 1
 while polyline[i] do
-     print(polyline[i].name,polyline[i].gender)
-     i = i+1
+     print(polyline[i].name,polyline[i].gender)
+     i = i+1
 end
 ```
 
-> 郭海涛     29
-> 王庚     30
-> 奥特曼     21
-> 怪兽     24
-> 马克思     23
-> 拿破仑     28
-> 希特勒     21
+> 郭海涛     29
+> 王庚     30
+> 奥特曼     21
+> 怪兽     24
+> 马克思     23
+> 拿破仑     28
+> 希特勒     21
 
 从这个例子来看，还真有点像表格。
 使用自定义索引初始化一个表中的元素
@@ -623,7 +623,7 @@ a=1,b=2;"one","two","three",
 
 赋值是改变一个变量的值和改变表域的最基本方法
 a = "hello" .. "world"
-t.n = t.n + 1  
+t.n = t.n + 1  
 
 Lua可以对多个变量同时赋值，变量列表和值列表的各个元素用逗号分开，赋值语句右边的值会一次赋给左边的变量。
 ```lua
@@ -634,42 +634,42 @@ print(a,b,c)
 a,b,c = 1,2,3,4 --当值多于变量时
 print(a,b,c)
 ```
-> 1     2     3
-> 1     2     nil
-> 1     2     3
+> 1     2     3
+> 1     2     nil
+> 1     2     3
 遇到赋值语句Lua会先计算右边所有的值然后再执行赋值操作，所以我们可以这样交换变量的值。
 
 ```lua
 --交换变量值
 x = 1 y = 2
-x,y = y,x  --交换数组的值也可以
+x,y = y,x  --交换数组的值也可以
 print(x,y)
 ```
-> 2     1
+> 2     1
 当变量个数和值的个数不一致时，Lua会一直以变量个数为基础采取以下策略：
-a、变量个数>值的个数  按变量个数不足nil
-b、变量个数<值的个数  多余的值会被忽略
+a、变量个数>值的个数  按变量个数不足nil
+b、变量个数<值的个数  多余的值会被忽略
 
 * 容易出错的地方是：
 ```lua
-a,b,c = 0     --错误
+a,b,c = 0     --错误
 print(a,b,c)
-a,b,c = 0,0,0  --正确
+a,b,c = 0,0,0  --正确
 print(a,b,c)
 ```
-> 0     nil     nil
-> 0     0     0
+> 0     nil     nil
+> 0     0     0
 
 多值赋值经常用来交换变量，或将函数调用返回给变量：
 ```lua
 function f ()
-     return 1,2  -可以同时返回多个值！！
+     return 1,2  -可以同时返回多个值！！
 end
 
 a,b=f()
 print(a,b)
 ```
-> 1    2
+> 1    2
 
 可以用来查询表格
 
@@ -683,17 +683,17 @@ x = 10
 local i = 1
 
 while i <= x do
-     local x = i*2
-     print(x)
-     i=i+1
-end               
+     local x = i*2
+     print(x)
+     i=i+1
+end               
 
 if i>20 then
-     local x
-     x=20
-     print(x+2)
+     local x
+     x=20
+     print(x+2)
 else
-     print(x)
+     print(x)
 end
 
 print(x)
@@ -710,39 +710,39 @@ else .. end
 
 ### 4.3 控制结构语句
 控制结构的条件表达式结果可以是任何值，Lua认为false和nil为假，其他值为真
-#### if语句  
+#### if语句  
 > if 条件表达式 then
->     代码块
+>     代码块
 > end;
 
-> if 条件表达式 then
->     代码块
+> if 条件表达式 then
+>     代码块
 > else
->      else-代码块
+>      else-代码块
 > end;
 
-> if 条件表达式 then
->     代码块
+> if 条件表达式 then
+>     代码块
 > elseif
->      elseif-代码块
+>      elseif-代码块
 > ...
 > else
->      else-代码块
+>      else-代码块
 > end;
 #### while 语句
 
-> while 条件表达式  do
->       代码块
->       迭代语句
+> while 条件表达式  do
+>       代码块
+>       迭代语句
 > end
 
 #### repeat - until 语句
 > repeat
->      代码块
->      迭代语句
+>      代码块
+>      迭代语句
 > until 条件表达式
 
-#### for语句  两大类
+#### for语句  两大类
 ##### 第一，数值for循环：
 
 ```lua
@@ -759,7 +759,7 @@ end
 ```lua
 function f ()
 print("我被调用了")
-return 3,1  --注意：这里的1没有任何意义
+return 3,1  --注意：这里的1没有任何意义
 end
 
 for i = 1 , f() do
@@ -776,7 +776,7 @@ end
 for i = 1 , 3 do
 print(i)
 end
-print(i)  --I的作用范围只在do..end 之间
+print(i)  --I的作用范围只在do..end 之间
 ```
 > 1
 > 2
@@ -799,10 +799,10 @@ print(li)
 
 3. 循环过程中不要改变控制变量的值，那样做的结果是不可预知的。如果要退出循环，使用break
 
-##### 第二，范型for循环 
+##### 第二，范型for循环 
 ```lua
 for i , v in ipairs(a) do
-   print(v)
+   print(v)
 end
 ```
 范型for遍历迭代子函数返回的每一个值
@@ -821,8 +821,8 @@ a = {0,1,2,3,4,5,6,7}
 v = 4
 local i = 1
 while a[i] do
-    if a[i]==v then break end
-     i = i+1
+    if a[i]==v then break end
+     i = i+1
 end
 print(i)
 ```
@@ -830,8 +830,8 @@ print(i)
 有时候为了调试或者其他目的需要在block的中间使用return或者break，可以显示的使用do..end来实现：
 ```lua
 function foo()
-   return  --错误的
-   do  return end  --可以的
+   return  --错误的
+   do  return end  --可以的
 end
 ```
 
@@ -841,8 +841,8 @@ end
 2. 计算并返回值，这种情况下函数作为赋值语句的表达式使用
 语法：
 > function 函数名 (参数列表)
->       代码块；
->       return 返回参数列表
+>       代码块；
+>       return 返回参数列表
 > end
 调用函数时，如果函数的参数列表为空，必须使用()表明是函数调用。
 
@@ -851,31 +851,31 @@ print(8*9,9/8)
 a = math.sin(3) + math.cos(10)
 print(a,os.date())
 ```
-> 72     1.125
-> -0.69795152101659     05/20/14 14:21:18
+> 72     1.125
+> -0.69795152101659     05/20/14 14:21:18
 但是：当函数只有一个参数并且这个参数是字符串或者表结构的时候，()是可选的。
-function f()  end
-print 'Hello World'        print('hello world')
-dofile 'a.lua'                dofile('a.lua')
-print [[aaaa                 print ([[aaaa
-aaaaaa]]                             aaaaaa]])
-f{x=10,y=20}               f({x=10,y=20})
-type{}                        type({})
-Lua也提供了面向对象方式调用函数的语法，比如o:foo(x)  与  o.foo(o,x)是等价的
+function f()  end
+print 'Hello World'        print('hello world')
+dofile 'a.lua'                dofile('a.lua')
+print [[aaaa                 print ([[aaaa
+aaaaaa]]                             aaaaaa]])
+f{x=10,y=20}               f({x=10,y=20})
+type{}                        type({})
+Lua也提供了面向对象方式调用函数的语法，比如o:foo(x)  与  o.foo(o,x)是等价的
 Lua使用的函数可以是Lua编写也可以是其他语言编写的，对于Lua程序员来说用什么语言实现的函数使用起来都是一样的
 Lua函数实参和形参的匹配与赋值语句类似，斗鱼的会被忽略，缺少的用nil补足
 
 ```lua
 function f(a,b)
-     print(a,b)
+     print(a,b)
 end
 f(3)
 f(3,4)
 f(3,4,5)
 ```
-> 3     nil
-> 3     4
-> 3     4
+> 3     nil
+> 3     4
+> 3     4
 ### 5.2 返回多个结果值
 Lua函数可以返回多个结果值，比如string.find
 其返回匹配串“开始和结束的下标”
@@ -884,24 +884,24 @@ Lua函数可以返回多个结果值，比如string.find
 s,e = string.find("hello Lua users","Lua")
 print(s,e)
 ```
-> 7     9
+> 7     9
 Lua函数中，在return后列出要返回的值的列表即可返回多个值
 ```lua
 --找到最大值和最大值的序号
 function maximum(a)
-     local mi = 1  --序号
-     local m = a[mi]  --值
-     for i , val in ipairs(a) do
-          if val > m then
-               mi = i
-               m = val
-          end
-     end
-     return m,mi
+     local mi = 1  --序号
+     local m = a[mi]  --值
+     for i , val in ipairs(a) do
+          if val > m then
+               mi = i
+               m = val
+          end
+     end
+     return m,mi
 end
 print(maximum({8,10,23,12,7}))
 ```
-> 23     3
+> 23     3
 
 Lua总是调整函数返回值的个数去适应调用环境，当作为一个语句调用时，所有返回值都被忽略。
 ```lua
@@ -917,12 +917,12 @@ x = foo2() print(x)
 x,y,z = 10,foo2() print(x,y,z)
 x,y,z = foo2(),10 print(x,y,z) --当函数不是参数列表的最后一个，就只返回1个值
 ```
-> a     b
-> a     nil
-> nil     nil
+> a     b
+> a     nil
+> nil     nil
 > a
-> 10     a     b
-> a     10     nil
+> 10     a     b
+> a     10     nil
 
 ##### 第一，当作为表达式调用函数时，有以下几种情况：
 1. 当调用作为表达式最后一个参数或者仅有一个参数时，根据变量个数函数尽可能多的返回多个值，不足补nil，超出的舍去
@@ -936,11 +936,11 @@ print(foo2(),10)
 print(10,foo2())
 print(foo2() .. "x")
 ```
->         --print()返回的是个空行
+>         --print()返回的是个空行
 > a
-> a     b
-> a     10
-> 10     a     b
+> a     b
+> a     10
+> 10     a     b
 > ax
 
 ##### 第三，函数调用在表结构函数中初始化时，和多值赋值时相同
@@ -951,7 +951,7 @@ function foo2() return "a","b" end
 
 function show(a)
 for i,v in ipairs(a) do
-     print(v)
+     print(v)
 end
 end
 
@@ -988,10 +988,10 @@ end
 print(foo(1))
 print(foo(2))
 print(foo(0)) --没有返回值
-print(foo(4)) --没有返回值
+print(foo(4)) --没有返回值
 ```
 > a
-> a     b
+> a     b
 
 
 可以使用圆括号强制是调用返回第一个值
@@ -1019,8 +1019,8 @@ print(f(unpack(a)))
 
 print(unpack(a))
 ```
-> 3     4
-> hello     ll
+> 3     4
+> hello     ll
 
 ```lua
 -- 进化型
@@ -1032,18 +1032,18 @@ a={foo()} print(unpack(a))
 a={foo1()} print(unpack(a))
 a={foo2()} print(unpack(a))
 a={foo2(),10} print(unpack(a))
-unpack函数  自制的
+unpack函数  自制的
 function unpack(t,i)
-     i = i or 1
-     if t[i] then
-          return t[i],unpack(t,i+1)
-     end
+     i = i or 1
+     if t[i] then
+          return t[i],unpack(t,i+1)
+     end
 end
 
 a={"a","b","c","d","e","tt","d"}
 print(unpack(a))
 ```
-> a     b     c     d     e     tt     d
+> a     b     c     d     e     tt     d
 
 ### 5.2 可变参数
 Lua函数可以接受可变数的参数，和C语言类似在函数参数列表中使用三点（...)，表示函数游客便的参数。
@@ -1053,17 +1053,17 @@ Lua将函数的参数放在一个叫arg的表中，除了参数以外，arg表�
 printResult = ""
 
 function print(...)
-     for i,v in ipairs(arg) do
-          printResult = printResult .. tostring(v) .. "\t"
-     end
-     printResult = printResult .. "\n"
+     for i,v in ipairs(arg) do
+          printResult = printResult .. tostring(v) .. "\t"
+     end
+     printResult = printResult .. "\n"
 end
 
 print("a","b","c","d")
 
 io.write(printResult)
 ```
-> a     b     c     d
+> a     b     c     d
 
 有时候我们可能需要几个固定参数加上可变参数
 
@@ -1104,7 +1104,7 @@ g(3,4,5,6)
 > 
 > a=3
 > b=4
-> 5     6
+> 5     6
 > arg.n=2
 > 
 > ----
@@ -1123,16 +1123,16 @@ print(string.find("hello hello","hel"))
 print(select(1,string.find("hello hello","hel")))
 print(select(2,string.find("hello hello","hel")))
 ```
-> 1     3
+> 1     3
 > 1
 > 3
 
 有时候 需要将函数的可变参数传递给另外的函数调用，可以使用前面我们说过的unpack（arg）返回arg表所有的可变参数，
-Lua提供了一个文本格式化的函数string.format()   类似C语言的sprintf函数)
+Lua提供了一个文本格式化的函数string.format()   类似C语言的sprintf函数)
 
 ```lua
 function fwrite (fmt,...)
-     return io.write(string.format(fmt,unpack(arg)))
+     return io.write(string.format(fmt,unpack(arg)))
 end
 ```
 
@@ -1143,7 +1143,7 @@ Lua的函数参数是和位置相关的，调用时实参会按顺序依次传�
 有时候用名字指定参数是很有用的，比如rename函数用来给一个文件重命名，有时候我们记不清命名前后两个参数的顺序了
 ```lua
 function remane(arg)
-     return os.rename(arg.old,arg.new)
+     return os.rename(arg.old,arg.new)
 end
 
 arg={old="a.lua",new="aa.lua",}
@@ -1165,23 +1165,23 @@ border = true
 }
 
 function Window (options)
-     --check mandatory options
-     if type(options.title) ~="string" then
-          error("no title")
-     elseif type(options.width) ~="number" then
-          error("no width")
-     elseif type(options.height) ~="number" then
-          error("no height")
-     end
+     --check mandatory options
+     if type(options.title) ~="string" then
+          error("no title")
+     elseif type(options.width) ~="number" then
+          error("no width")
+     elseif type(options.height) ~="number" then
+          error("no height")
+     end
 
-     _Window(options.title,
-          options.x or 0,
-          options.y or 0,
-          options.width,
-          options.height,
-          options.background or "white",
-          options.border
-          )
+     _Window(options.title,
+          options.x or 0,
+          options.y or 0,
+          options.width,
+          options.height,
+          options.background or "white",
+          options.border
+          )
 end
 
 Window(w)
@@ -1198,7 +1198,7 @@ Lua中关于函数稍微难以理解的是函数也可以没有名字，匿名�
 当我们提到函数名（如print），实际上是说一个指向特定函数的变量，像持有其他类型值的变量一样：
 
 ```lua
-a = {p = print}  --把print函数赋给a.p
+a = {p = print}  --把print函数赋给a.p
 a.p("Hello World") --用a.p就可以实现print的功能
 print = math.sin --把math.sin赋给print
 a.p(print(1)) --print就变成了计算sin
@@ -1207,13 +1207,13 @@ sin(10,20) -- sin就成了print
 ```
 > Hello World
 > 0.8414709848079
-> 10     20
+> 10     20
 
 既然函数是值，那么表达式也可以创建创建函数了
 
 ```lua
 function foo(x) return 2*x end
---语法上的甜头  syntactic sugar
+--语法上的甜头  syntactic sugar
 foo1 = function (x) return 2*x end
 
 print(foo(1))
@@ -1229,11 +1229,11 @@ table标准库提供一个排序函数，接受一个表作为输入参数并且
 Lua不是尽可能多地提供参数来满足这些情况的需要，而是接受一个排序函数作为参数（类似C++的函数对象），排序函数接受两个排序作为输入参数，并且返回两者的大小关系。
 ```lua
 network = {
-     {name = "grauna", IP = "210.26.30.34"},
-     {name = "arraial", IP = "210.26.30.23"},
-     {name = "lua", IP = "210.26.30.12"},
-     {name = "derain", IP = "210.26.30.20"},
-     {name = "admin", IP = "210.26.30.24"},
+     {name = "grauna", IP = "210.26.30.34"},
+     {name = "arraial", IP = "210.26.30.23"},
+     {name = "lua", IP = "210.26.30.12"},
+     {name = "derain", IP = "210.26.30.20"},
+     {name = "admin", IP = "210.26.30.24"},
 }
 
 table.sort(network,function (a,b) return (a.name<b.name) end)
@@ -1242,11 +1242,11 @@ for i ,v in ipairs(network) do
 print(v.name,v.IP)
 end
 ```
-> admin     210.26.30.24
-> arraial     210.26.30.23
-> derain     210.26.30.20
-> grauna     210.26.30.34
-> lua     210.26.30.12
+> admin     210.26.30.24
+> arraial     210.26.30.23
+> derain     210.26.30.20
+> grauna     210.26.30.34
+> lua     210.26.30.12
 
 红色部分是一个作为参数传递的函数，绿色的箭头决定了排列的顺序
 （我估计这是一个固定模式，下次拿来直接用就好了，需要改的地方就是黄色的部分
@@ -1255,12 +1255,12 @@ end
 
 ```lua
 function eraseTerminal()
-     io.write("\23[2J")
+     io.write("\23[2J")
 end
 
 --writes an `*' at column `x' , row `y'
 function mark (x,y)
-     io.write(string.format("\27[%d;%dH*",y,x))
+     io.write(string.format("\27[%d;%dH*",y,x))
 end
 
 --Terminal size
@@ -1269,13 +1269,13 @@ TermSize = {w = 80, h = 24}
 --plot a function
 --(assume that domain and image are in the range [-1,1])
 function plot (f)
-     eraseTerminal()
-     for i = 1, TermSize.w do
-          local x = (i / TermSize.w)*2 -1
-          local y = (f(x)+1)/2*TermSize.h
-          mark(i,y)
-     end
-     io.read() --wait before spoiling the screen
+     eraseTerminal()
+     for i = 1, TermSize.w do
+          local x = (i / TermSize.w)*2 -1
+          local y = (f(x)+1)/2*TermSize.h
+          mark(i,y)
+     end
+     io.read() --wait before spoiling the screen
 end
 
 plot(function (x) return math.sin(x*2*math.pi) end)
@@ -1285,23 +1285,23 @@ plot(function (x) return math.sin(x*2*math.pi) end)
 将第一类值函数应用在表中是Lua实现面向对象和包机制的关键
 
 ```lua
-function Human()
-human =  {
-name = "郭海涛" ,
-age = 29 ,
-sex = "男" ,
-aihao = "吃饭、睡觉、打豆豆" ,
-job = "编程" ,
-show = function () return "姓名：" ..
-  human .name .. " 年龄：" .. human.age ..
-  " 性别：" .. human.sex .. "\n爱好：" ..
-  human .aihao .. "\n工作：" .. human.job  end
+function Human()
+human =  {
+name = "郭海涛" ,
+age = 29 ,
+sex = "男" ,
+aihao = "吃饭、睡觉、打豆豆" ,
+job = "编程" ,
+show = function () return "姓名：" ..
+  human .name .. " 年龄：" .. human.age ..
+  " 性别：" .. human.sex .. "\n爱好：" ..
+  human .aihao .. "\n工作：" .. human.job  end
 }
-return human
+return human
 end
-a = Human().name
-b = Human()
-b.name = "王庚"
+a = Human().name
+b = Human()
+b.name = "王庚"
 print(a)
 print(b.show())
 ```
@@ -1326,16 +1326,16 @@ print(b.show())
 names = {"a","b","c"}
 grades = {a=10,b=20,c=15}
 function sortbygrade (names,grades)
-     table.sort(names,
-          function(n1,n2)
-               return grades[n1]>grades[n2]
-          end)
+     table.sort(names,
+          function(n1,n2)
+               return grades[n1]>grades[n2]
+          end)
 end
 
 sortbygrade(names,grades)
 print(unpack(names))
 ```
-> b     c     a
+> b     c     a
 
 * 分析：
 names表和grades表之间的关系是grades的下标是names的值
@@ -1343,11 +1343,11 @@ names表和grades表之间的关系是grades的下标是names的值
 
 ```lua
 function newCounter()
-     local i = 0
-     return function()
-          i = i+1
-          return i
-     end
+     local i = 0
+     return function()
+          i = i+1
+          return i
+     end
 end
 
 c1 = newCounter()
@@ -1361,11 +1361,11 @@ print(c1())
 
 ```lua
 function newCounter()
-     local i = 0
-     return function()
-          i = i+1
-          return i
-     end
+     local i = 0
+     return function()
+          i = i+1
+          return i
+     end
 end
 
 c1 = newCounter()
@@ -1392,11 +1392,11 @@ c1和c2都是建立在同一个函数上，但作用在同一个局部变量的�
 
 ```lua
 function digitButton (digit)
-     return Button{ label = digit,
-                    action = function ()
-                         add_to_display(digit)
-                    end
-     }
+     return Button{ label = digit,
+                    action = function ()
+                         add_to_display(digit)
+                    end
+     }
 end
 ```
 
@@ -1412,7 +1412,7 @@ digitButton完成任务返回后，局部变量digit超出范围，回调函数�
 ```lua
 oldSin = math.sin
 math.sin = function(x)
-   return oldSin(x*math.pi/180)
+   return oldSin(x*math.pi/180)
 end
 ```
 
@@ -1420,11 +1420,11 @@ end
 
 ```lua
 do
-     local oldSin = math.sin
-     local k = math.pi/180
-     math.sin = function(x)
-          return oldSin(x*k)
-     end
+     local oldSin = math.sin
+     local k = math.pi/180
+     math.sin = function(x)
+          return oldSin(x*k)
+     end
 end
 ```
 
@@ -1434,18 +1434,18 @@ end
 
 ```lua
 function access_OK(filename,mode)
-     --判断文件是否允许打开
+     --判断文件是否允许打开
 end
 
 do
-     local oldOpen = io.open
-     io.open = function(filename,mode)
-          if access_OK(filename,mode) then
-               return oldOpen(filename,mode)
-          else
-               return nil,"access denied"
-          end
-     end
+     local oldOpen = io.open
+     io.open = function(filename,mode)
+          if access_OK(filename,mode) then
+               return oldOpen(filename,mode)
+          else
+               return nil,"access denied"
+          end
+     end
 end
 ```
 
@@ -1472,10 +1472,10 @@ goo = function(x,y) return x-y end
 ```lua
 Lib = {}
 function Lib.foo(x,y)
-     return x+y
+     return x+y
 end
 function Lib.goo(x,y)
-     return x-y
+     return x-y
 end
 ```
 
@@ -1488,17 +1488,17 @@ end
 
 ```lua
 do
-     local f = function (...)
-          print("a")
-     end
+     local f = function (...)
+          print("a")
+     end
 
-     local g = function(...)
-          print("b")
-          f()
-          print("c")
-     end
+     local g = function(...)
+          print("b")
+          f()
+          print("c")
+     end
 
-     g() --这里可以看到f函数
+     g() --这里可以看到f函数
 
 end
 
@@ -1508,7 +1508,7 @@ g() --这里看不到g函数
 * 方法二
 ```lua
 local function f(...)
-     print("a")
+     print("a")
 end
 ```
 
@@ -1517,23 +1517,23 @@ end
 错误的
 ```lua
 local fact = function (n)
-     if n == 0 then
-          return 1
-     else
-          return n*fact(n-1)  --报错的地方
-     end
+     if n == 0 then
+          return 1
+     else
+          return n*fact(n-1)  --报错的地方
+     end
 end
 ```
 
 正确的
 ```lua
-local fact   --需要先声明
+local fact   --需要先声明
 fact = function (n)
-     if n == 0 then
-          return 1
-     else
-          return n*fact(n-1)
-     end
+     if n == 0 then
+          return 1
+     else
+          return n*fact(n-1)
+     end
 end
 ```
 
@@ -1544,10 +1544,10 @@ end
 ```lua
 local f, g
 function g()
-   ... f() ...
+   ... f() ...
 end
 function f()
-   ... g() ...
+   ... g() ...
 end
 ```
 
@@ -1557,7 +1557,7 @@ Lua中函数的另一个有趣的特征是可以正确的处理尾调用
 
 ```lua
 function f(x)
-     return g(x)
+     return g(x)
 end
 ```
 
@@ -1568,7 +1568,7 @@ g的调用就是尾调用
 例如下面调用无论n为何值都不会导致栈溢出。
 ```lua
 function foo (n)
-     if n>0 then rturn foo(n-1) end
+     if n>0 then rturn foo(n-1) end
 end
 ```
 
@@ -1576,8 +1576,8 @@ end
 一些调用者函数调用其他函数后也没有做其他的事情，但是不属于尾调用例如
 ```lua
 function f (x)
-     g(x)
-     return
+     g(x)
+     return
 end
 ```
 
@@ -1601,46 +1601,46 @@ return x[i].foo(x[j]+a*b,i+j)
 
 ```lua
 function room1 ()
-     print("这里是room1")
-     local move = io.read()
-     if move == "south" then
-          return room3()
-     elseif move == "east" then
-          return room2()
-     else
-          print("invalid move")
-          return room1() --留在原地
-     end
+     print("这里是room1")
+     local move = io.read()
+     if move == "south" then
+          return room3()
+     elseif move == "east" then
+          return room2()
+     else
+          print("invalid move")
+          return room1() --留在原地
+     end
 end
 
 function room2 ()
-     print("这里是room2")
-     local move = io.read()
-     if move == "south" then
-          return room4()
-     elseif move == "west" then
-          return room1()
-     else
-          print("invalid move")
-          return room2() --留在原地
-     end
+     print("这里是room2")
+     local move = io.read()
+     if move == "south" then
+          return room4()
+     elseif move == "west" then
+          return room1()
+     else
+          print("invalid move")
+          return room2() --留在原地
+     end
 end
 
 function room3 ()
-     print("这里是room3")
-     local move = io.read()
-     if move == "north" then
-          return room1()
-     elseif move == "east" then
-          return room4()
-     else
-          print("invalid move")
-          return room3() --留在原地
-     end
+     print("这里是room3")
+     local move = io.read()
+     if move == "north" then
+          return room1()
+     elseif move == "east" then
+          return room4()
+     else
+          print("invalid move")
+          return room3() --留在原地
+     end
 end
 
 function room4 ()
-     print("congratilations!")
+     print("congratilations!")
 end
 
 room1()
@@ -1664,31 +1664,31 @@ room1()
 一个是工厂（创建闭包的函数）
 例子：一个list的简单迭代器，与ipairs()不同的是，我们实线的这个迭代器返回元素的值而不是索引的下标：
 ```lua
-function list_iter(t)  --迭代器
-     local i = 0
-     local n = table.getn(t)
-     return function ()
-          i = i + 1
-          if i <=n then return t[i] end
-     end
+function list_iter(t)  --迭代器
+     local i = 0
+     local n = table.getn(t)
+     return function ()
+          i = i + 1
+          if i <=n then return t[i] end
+     end
 end
 
 a = {1,2,3,4,5,6}
-print(table.getn(a))  -->6
+print(table.getn(a))  -->6
 ```
-table.getn(a)  得到数组的长度
+table.getn(a)  得到数组的长度
 
 这个例子中list_iter是一个工厂，每次调用它都会创建一个新的闭包（迭代器本身）。
 闭包保存内部局部变量（t,i,n)，因此诶地调用他返回list的下一个元素值，当list中没有值时，返回nil 我们可以再while语句中使用这个迭代器
 
 ```lua
 function list_iter(t)
-     local i = 0
-     local n = table.getn(t)
-     return function ()
-          i = i + 1
-          if i <=n then return t[i] end
-     end
+     local i = 0
+     local n = table.getn(t)
+     return function ()
+          i = i + 1
+          if i <=n then return t[i] end
+     end
 end
 
 a = {1,2,3,4,5,6}
@@ -1696,27 +1696,27 @@ print(table.getn(a))
 
 iter = list_iter(a)
 while true do
-     local element = iter()
-     if element == nil then break end
-     print (element)
+     local element = iter()
+     if element == nil then break end
+     print (element)
 end
 ```
 
 我们设计的这个迭代器也可以用在泛型for语句
 ```lua
 for element in list_iter(a) do
-     print(element)
+     print(element)
 end
 ```
 可以想象成，迭代器把数值返回到了element中，假设如果返回的是2个变量，那么只需要在因前面放两个变量
 ```lua
 function list_iter(t)
-     local i = 0
-     local n = table.getn(t)
-     return function ()
-          i = i + 1
-          if i <=n then return t[i],i end
-     end
+     local i = 0
+     local n = table.getn(t)
+     return function ()
+          i = i + 1
+          if i <=n then return t[i],i end
+     end
 end
 
 a = {1,2,3,4,5,6}
@@ -1724,7 +1724,7 @@ a = {1,2,3,4,5,6}
 iter = list_iter(a)
 
 for element,i in list_iter(a) do
-     print(element .. "下标" .. i)
+     print(element .. "下标" .. i)
 end
 ```
 > 1下标1
@@ -1741,21 +1741,21 @@ end
 高级的例子
 ```lua
 function allwords()
-     local line = io.read()
-     local pos = 1
-     return function ()
-          while line do
-               local s,e = string.find(line,"%w+",pos)
-               if s then
-                    pos = e+1
-                    return string.sub(line,s,e)
-               else
-                    line = io.read()
-                    pos = 1
-               end
-          end
-     return nil
-     end
+     local line = io.read()
+     local pos = 1
+     return function ()
+          while line do
+               local s,e = string.find(line,"%w+",pos)
+               if s then
+                    pos = e+1
+                    return string.sub(line,s,e)
+               else
+                    line = io.read()
+                    pos = 1
+               end
+          end
+     return nil
+     end
 end
 ```
 
@@ -1764,26 +1764,26 @@ end
 迭代函数的主体部分调用了string.find函数，string.find在当前行从当前位置开始查找匹配的单词，例子中匹配的单词使用模式'%w+'描述的，如果查找到一个单词，迭代函数更新当前位置pos为单词后的第一个位置，并且返回这个单词
 ```lua
 function allwords()
-     local line = io.read()
-     local pos = 1
-     return function ()
-          while line do
-               local s,e = string.find(line,"abc",pos)
-               if s then
-                    pos = e+1
-                    return string.sub(line,s,e)
-               else
-                    line = io.read()
-                    pos = 1
-               end
-          end
-     return nil
-     end
+     local line = io.read()
+     local pos = 1
+     return function ()
+          while line do
+               local s,e = string.find(line,"abc",pos)
+               if s then
+                    pos = e+1
+                    return string.sub(line,s,e)
+               else
+                    line = io.read()
+                    pos = 1
+               end
+          end
+     return nil
+     end
 end
 
 --迭代函数的使用
 for v in allwords() do
-     print(v)
+     print(v)
 end
 ```
 把"%w+"换成了"abc"
@@ -1794,13 +1794,13 @@ end
 这不是一个大问题：一般Lua编程不需要自己定义迭代函数，而是使用语言提供的，除非确实需要自己定义。
 
 ### 7.2 泛型for的语义
-     前面我们看到的迭代器有一个缺点：
+     前面我们看到的迭代器有一个缺点：
 每次调用都需要创建一个闭包，大多数情况下，这种做法没问题，例如在allwords迭代器中创建一个闭包的代价比起读整个文件来说微不足道，然而在有些情况下创建闭包的代价是不能容忍的，在这种情况下我们可以使用泛型for本身来保存迭代状态。
 前面我们看到了循环过程中，for在自己内部保存迭代函数，实际上他保存三个值，迭代函数，状态函数和控制函数
 泛型for的文法如下：
 ```lua
 for <var-list变量列表> in <exp-list表达式列表> do
-        <body>
+        <body>
 end
 ```
 <var-list>是一个或多个以逗号分隔的变量名列表，
@@ -1809,21 +1809,21 @@ end
 ```lua
 a = {11,22,33,44,55,66}
 
-for k,v in pairs(a) do    
-     print(k,v)
+for k,v in pairs(a) do    
+     print(k,v)
 end
 ```
-> 1     11
-> 2     22
-> 3     33
-> 4     44
-> 5     55
-> 6     66
+> 1     11
+> 2     22
+> 3     33
+> 4     44
+> 5     55
+> 6     66
 
 变量列表k，v；表达式列表pairs(t)，在很多情况下变量列表也只有一个变量，比如：
 ```lua
 for line in io.lines() do
-     io.write(line,"\n")
+     io.write(line,"\n")
 end
 ```
 功能，你输入一行他就输出一行然后换行
@@ -1842,13 +1842,13 @@ end
 等价于
 ```lua
 do
-    local _f,_s,_var = explist
-    while true do
-        local var_1,...,var_n = _f(_s,_var)
-        _var = var_1
-        if _var == nil then break end
-        block
-    end
+    local _f,_s,_var = explist
+    while true do
+        local var_1,...,var_n = _f(_s,_var)
+        _var = var_1
+        if _var == nil then break end
+        block
+    end
 end
 ```
 如果我们的迭代函数式f，状态常量是s，控制变量的初始值是a0，那么控制变量将循环：a1=f(s,a0)、a2=f(s,a1)、...,知道ai=nil
@@ -1857,24 +1857,24 @@ end
 每一次迭代，迭代函数都是用两个变量（状态常量和控制常量）的值作为参数被调用，一个无状态的迭代器只利用这两个值可以获取下一个元素。这种无状态迭代器的典型的简单的列子是ipairs，他办理数组的每一个元素。
 ```lua
 for k,v in ipairs(a) do
-     print(k,v)
+     print(k,v)
 end
 ```
 迭代的状态包括被遍历的表（循环过程中不会改变的状态常量）和当前的索引下标（控制变量），ipairs和迭代函数都很简单
 ```lua
 a = {11,22,33,44,55,66}
 function iter (a,i)
-     i = i+1
-     local v = a[i]
-     if v then return i , v end
+     i = i+1
+     local v = a[i]
+     if v then return i , v end
 end
 
 function ipairs (a) --此函数只被运行一次
-     return iter,a,0
+     return iter,a,0
 end
 
 for k,v in ipairs(a) do
-     print(k,v)
+     print(k,v)
 end
 ```
 当Lua调用ipairs(a)开始循环时，他获取三个值，迭代函数iter，状态常量a和控制变量初始值0；然后Lua调用iter(a,0)返回1，a[1]（除非a[1]=nil)；第二次迭代调用iter(a,1)返回2，a[2]...直到第一个非nil元素
@@ -1884,30 +1884,30 @@ Lua库中实现的pairs是一个用next实现的原始方法：
 ---pairs函数的源代码
 --利用next进行迭代
 function pairs (t)
-  return next , t, nil
+  return next , t, nil
 end
 ---pairs函数的使用
 for k,v in pairs(a) do
-  print(k,v)
+  print(k,v)
 end
 ---直接使用next
 for k , v in next, a do
-  print(k,v)
+  print(k,v)
 end
 ```
 记住：exp-list返回结果会被调整为三个，所以Lua获取next、t、nil；确切的说当他调用pairs时获取。
 ```lua
 ---直接使用next
 for k , v in next, a, 2 do
-  print(k,v)
+  print(k,v)
 end
 ```
 实验：因为Lua获取的是三个参数，所以如果我们不给他他得到的是nil，如果给他一个值，比如2，就从第三个位置开始遍历了
 
-> 3     33
-> 4     44
-> 5     55
-> 6     66
+> 3     33
+> 4     44
+> 5     55
+> 6     66
 
 ### 7.4 多状态的迭代器
 很多情况下，迭代器需要保存多个状态信息而不是简单的状态常量和控制变量，最简单的方法是使用闭包，还有一种方法就是讲所有信息封装到table内，将table作为迭代器的状态常量，因为这种情况下可以将所有的信息存放在table内，所以迭代函数通常不需要第二个参数。
@@ -1917,26 +1917,26 @@ end
 local iterator
 
 function allwords()
-     local state = {line = io.read() , pos = 1}
-     return iterator , state
+     local state = {line = io.read() , pos = 1}
+     return iterator , state
 end
 
 function iterator(state)
-     while state.line do
-          local s,e=string.find(state.line,"abc",state.pos)
-          if s then
-               state.pos = e+1
-               return string.sub(state.line,s,e)
-          else
-               state.line = io.read()
-               state.pos = 1
-          end
-     end
-     return nil
+     while state.line do
+          local s,e=string.find(state.line,"abc",state.pos)
+          if s then
+               state.pos = e+1
+               return string.sub(state.line,s,e)
+          else
+               state.line = io.read()
+               state.pos = 1
+          end
+     end
+     return nil
 end
 
 for v in allwords() do
-     print(v)
+     print(v)
 end
 ```
 我们应该尽可能的写无状态的迭代器，因为这样循环的时候有for来保存状态，不需要创建对象花费的代价小；
@@ -1953,13 +1953,13 @@ end
 
 function allwords (f)
 --repeat for each line in the file
-     for l in io.lines() do
-          --repeat for each word in the line
-          for w in string.gfind(l,"abc") do
-               --call the function
-               f(w)
-          end
-     end
+     for l in io.lines() do
+          --repeat for each word in the line
+          for w in string.gfind(l,"abc") do
+               --call the function
+               f(w)
+          end
+     end
 end
 
 allwords(print)
@@ -1978,7 +1978,7 @@ print(count)
 ```lua
 local count = 0
 for w in allwords() do
-     if w=="hello" then count = count + 1                       end
+     if w=="hello" then count = count + 1                       end
 end
 print(count)
 ```
@@ -1995,14 +1995,14 @@ print(count)
 前面我们介绍过dofile，把它当做lua运行代码的chunk的一种原始的操作。dofile实际上是一个辅助的函数。真正完成功能的是loadfile；与dofile不同的是loadfile编译代码成中间码并返回编译后的chunk作为一个函数。而不是执行代码；另外loadfile不会抛出错误信息而是返回错误代码。我们可以这样定义dofile：
 ```lua
 function dofile (filename)
-     local f = assert(loadfile(filename))
-     return f()
+     local f = assert(loadfile(filename))
+     return f()
 end
 ```
 如果loadfile失败assert会抛出错误
 发生错误的情况下loadfile返回nil和错误信息，这样我们就可以自定义错误处理。
 如果运行一个文件多次的话，loadfile只需要编译一次，但可多次运行。dofile每次都要编译
-loadstring  与 loadfile相似，只不过他不是从文件里读入chunk，而是从一个串中读入。
+loadstring  与 loadfile相似，只不过他不是从文件里读入chunk，而是从一个串中读入。
 例如：
 ```lua
 f = loadstring("i = i+1")
@@ -2026,7 +2026,7 @@ print(f())
 loadfile 和 loadstring 都不会抛出错误，如果发生错误他们将返回nil加上错误信息；
 
 print(loadstring ("local a =z 10 ; return a +20"))
-nil     [string "local a =z 10 ; return a +20"]:1: unexpected symbol near '10'
+nil     [string "local a =z 10 ; return a +20"]:1: unexpected symbol near '10'
 
 另外，loadfile和loadstring 都不会有边界效应产生，他们仅仅编译chunk称为自己内部实现的一个匿名函数。通常对他们的误解是他们定义了函数。
 Lua中的函数定义是发生在运行时的赋值而不是发生在编译时。加入我们有一个文件foo.lua：
@@ -2034,10 +2034,10 @@ Lua中的函数定义是发生在运行时的赋值而不是发生在编译时�
 ```lua
 -- file 'foo.lua'
 function foo (x)
-     print(x)
+     print(x)
 end
 f = loadfile("foo.lua") --被编译
-f()   --被执行
+f()   --被执行
 foo("ok")
 ```
 
@@ -2050,13 +2050,13 @@ loadstring(s)()
 ```
 > 11231
 
-f = loadstring("i = i + 1")   -- 1
+f = loadstring("i = i + 1")   -- 1
 等价于
-f = function() i = i+1 end    --2
+f = function() i = i+1 end    --2
 但是2的速度更快，因为2只编译一次，1却每次都会编译。
 
 ```lua
-local i = 0   --局部变量
+local i = 0   --局部变量
 
 f = loadstring("return i")
 g = function() return i end
@@ -2064,11 +2064,11 @@ g = function() return i end
 print(f())
 print(g())
 ```
-> nil    -- loadstring无法访问
+> nil    -- loadstring无法访问
 > 0
 
 ```lua
-i = 0   --全局变量
+i = 0   --全局变量
 
 f = loadstring("return i")
 g = function() return i end
@@ -2102,8 +2102,8 @@ print 'enter function to be plotted (with variable "x"):'
 local l = io.read()
 local f = assert(loadstring("return " .. l))
 for i = 1 , 20 do
-     x = i
-     print(string.rep("*" , f()))
+     x = i
+     print(string.rep("*" , f()))
 end
 ```
 > ******
@@ -2114,13 +2114,13 @@ end
 > ******
 > ******
 > ******
-> ******  一共20行
+> ******  一共20行
 
 ```lua
 print(string.rep("*",5))
 ```
 
-> *****      --输出几个重复的
+> *****      --输出几个重复的
 
 ### 8.1 require 函数
 Lua提供高级的require函数来加载运行库。
@@ -2192,7 +2192,7 @@ assert(tonumber(n),"invalid input:" .. n .. "is not a number")
 正确做法
 ```lua
 n = io.read()
-text = "invalid input:" .. n .. "is not a number"
+text = "invalid input:" .. n .. "is not a number"
 assert(tonumber(n),text)
 ```
 
@@ -2209,16 +2209,16 @@ assert把io.open返回的两个参数作为实参窜入到自己里面反悔了i
 如果在Lua中需要处理错误，需要使用pcall函数封装这段代码
 捕获所有的异常和错误：
 ```lua
-function foo ()  --用函数封装代码
+function foo ()  --用函数封装代码
 n = io.read()
 text =n .. "不是数字"
 assert(tonumber(n),text) --这段代码必须存在否则系统认为没有错
 end
 
-if pcall(foo) then  --用pcall调用这个函数
-     print("没有异常时运行的代码")
+if pcall(foo) then  --用pcall调用这个函数
+     print("没有异常时运行的代码")
 else
-     print("有异常时运行的代码")
+     print("有异常时运行的代码")
 end
 ```
 
@@ -2228,39 +2228,39 @@ end
 
 ```lua
 if pcall(
-     function ()
-          n = io.read()
-          text =n .. "不是数字"
-          assert(tonumber(n),text)
-     end
+     function ()
+          n = io.read()
+          text =n .. "不是数字"
+          assert(tonumber(n),text)
+     end
 ) then
-     print("没有异常时运行的代码")
+     print("没有异常时运行的代码")
 else
-     print("有异常时运行的代码")
+     print("有异常时运行的代码")
 end
 ```
 如果没有错误就返回值
 ```lua
 n,x = pcall(foo)
-print (n,x)  --n是对错   x是值
+print (n,x)  --n是对错   x是值
 ```
-> true     4
+> true     4
 
 一套完整的异常处理机制
 ```lua
 function foo ()
-     n = io.read()
-     text =n .. "不是数字"
-     assert(tonumber(n),text)
-     return n
+     n = io.read()
+     text =n .. "不是数字"
+     assert(tonumber(n),text)
+     return n
 end
 
-local  n,v = pcall(foo)
+local  n,v = pcall(foo)
 
 if n then
-     print(v+2)
+     print(v+2)
 else
-     print(v)
+     print(v)
 end
 ```
 我们通过error抛出异常，通过pcall捕获异常
@@ -2284,8 +2284,8 @@ table是Lua中唯一的数据结构
 
 ```lua
 a = {}
-for i = 1 , 1000 do  --数组长度是1000
-     a[i] = 0
+for i = 1 , 1000 do  --数组长度是1000
+     a[i] = 0
 end
 ```
 可以根据需要设定数组起始下标
@@ -2300,7 +2300,7 @@ io.write用于需要完全控制输出时使用 ？？这句话不明白
 io.write使用当前输出文件
 print始终使用标准输出
 * 输出内容不同
-io.write不附加任何额外的字符到输出中去，例如制表符，换行符等     这个不太明白
+io.write不附加任何额外的字符到输出中去，例如制表符，换行符等     这个不太明白
 * 自动调用tostring方法
 print会自动调用tostring方法，会显示表tables、函数function和nil
 io.write输出这些会报错！
