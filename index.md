@@ -1,4 +1,4 @@
-# ![标题图](./img/logo.jpg)学习笔记哦
+# <img src="./img/logo.jpg" width = "100" height = "100" alt="标题图" />学习笔记哦
 
 MD文件
 ---
