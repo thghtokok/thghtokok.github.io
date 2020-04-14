@@ -4,6 +4,11 @@
 * [Maven 的学习笔记](./md/maven学习笔记.md)
 * [Druid 学习](./md/Druid学习.md) 
 * [Expect 学习](./md/expect学习.md)
+
 ---
 
-<a href="./oops.html">Oops.html(有彩蛋)</a> 
+* [git分支说明](./pdf/git分支说明.pdf)
+
+---
+
+* [Oops.html(有彩蛋)](./oops.html)
