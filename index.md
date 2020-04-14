@@ -8,7 +8,7 @@ MD文件
 * [Druid 学习](./md/Druid学习.md) 
 * [Expect 学习](./md/expect学习.md)
 * [Mysql 索引规则](./md/Mysql索引规则.md)
-* [Lua 学习笔记(MD化了一半)](./md/Lua学习笔记.md)
+* [Lua 学习笔记](./md/Lua学习笔记.md)
 
 PDF文件
 ---
