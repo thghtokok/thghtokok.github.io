@@ -1,11 +1,106 @@
 # SpringCloud学习笔记
 
+* 《疯狂Spring Cloud微服务框架实战》
+
 ## 第四章 负载均衡 Ribbon  瑞本
 
 负载均衡是分布式框架的重点, 负载均衡机制决定者整个服务集群的性能和稳定. 
 
+### 4.5 RestTemplate 负载均衡 P77
+
+
+
 ### 4.4 在Spring CLoud 中使用 Ribbon
 
+* 之前被 @LoadBalanced 修饰的 RestTemplate 实体就是有负载均衡
+
+#### 4.4.1 准备工作 P71
+
+* 之前已经做了
+
+#### 4.4.2 使用代码配置Ribbon
+
+* MyRule 实现 IPule 自定义规则
+* MyPing 实现 IPing 自定义Ping
+* MyConfig 生成 rule 和 ping 两个 Bean
+* CloudProviderConfig 声明 Ribbon 使用 MyConfig
+    * @RibbonClient 注解 配置了RibbonClient的名称 (这里应该是服务提供者的名称我这里是first-cloud-server) , 和对应的配置类
+
+#### 4.4.3 使用配置文件设置Ribbon
+
+```yml
+cloud-provider:
+    ribbon:
+        NFLoadBalancerRuleClassName: xx.xx.xx.MyRule
+        NFLoadBalancerPingClassName: xx.xx.xx.MyPing
+        listOfServers: http://localhost:8080/,http://localhost:8081/
+```
+
+## 疑问: listOfServers 这个配置是必须的吗
+  * 不是必须的, 配置了 eureka后, 会根据 服务名获取服务器列表
+
+#### 4.4.4 Spring 使用 Ribbon 的 API
+
+Spring Cloud 对 Ribbon 进行了封装, 可以直接使用 Spring 的 LoadBalancerClient 来处理请求以及服务选择
+
+```java
+@Autowired
+private LoadBalancerClient loadBalancerClient;
+
+@GetMapping(value = "/uselb")
+public ServiceInstance uselb() {
+    return loadBalancerClient.choose("first-cloud-server");
+}
+```
+
+直接使用Ribbon的API
+
+```java
+    @Autowired
+    private SpringClientFactory factory;
+
+
+    @GetMapping(value = "defaultValue")
+    public Map<String, Object> defaultValue() {
+        Map<String, Object> result = Maps.newLinkedHashMap();
+        ZoneAwareLoadBalancer alb = (ZoneAwareLoadBalancer) factory.getLoadBalancer("default");
+        result.put("alb.IClientConfig", alb.getClientConfig().getClass().getName());
+        result.put("alb.IRule", alb.getRule().getClass().getName());
+        result.put("alb.IPing", alb.getPing().getClass().getName());
+        result.put("alb.ServerList", alb.getServerListImpl().getClass().getName());
+        result.put("alb.ServerListFilter", alb.getFilter().getClass().getName());
+        result.put("alb.ILoadBalancer", alb.getClass().getName());
+        result.put("alb.PingInterval", alb.getPingInterval());
+        ZoneAwareLoadBalancer alb2 = (ZoneAwareLoadBalancer) factory.getLoadBalancer("first-cloud-server");
+        result.put("alb2.IClientConfig", alb2.getClientConfig().getClass().getName());
+        result.put("alb2.IRule", alb2.getRule().getClass().getName());
+        result.put("alb2.IPing", alb2.getPing().getClass().getName());
+        result.put("alb2.ServerList", alb2.getServerListImpl().getClass().getName());
+        result.put("alb2.ServerListFilter", alb2.getFilter().getClass().getName());
+        result.put("alb2.ILoadBalancer", alb2.getClass().getName());
+        result.put("alb2.PingInterval", alb2.getPingInterval());
+        return result;
+    }
+```
+
+```json
+{
+  "alb.IClientConfig": "com.netflix.client.config.DefaultClientConfigImpl",
+  "alb.IRule": "com.netflix.loadbalancer.ZoneAvoidanceRule",
+  "alb.IPing": "com.netflix.niws.loadbalancer.NIWSDiscoveryPing",
+  "alb.ServerList": "org.springframework.cloud.netflix.ribbon.eureka.DomainExtractingServerList",
+  "alb.ServerListFilter": "org.springframework.cloud.netflix.ribbon.ZonePreferenceServerListFilter",
+  "alb.ILoadBalancer": "com.netflix.loadbalancer.ZoneAwareLoadBalancer",
+  "alb.PingInterval": 30,
+  "alb2.IClientConfig": "com.netflix.client.config.DefaultClientConfigImpl",
+  "alb2.IRule": "cn.thght.cloudinvoker.ribbon.MyRule",
+  "alb2.IPing": "cn.thght.cloudinvoker.ribbon.MyPing",
+  "alb2.ServerList": "org.springframework.cloud.netflix.ribbon.eureka.DomainExtractingServerList",
+  "alb2.ServerListFilter": "org.springframework.cloud.netflix.ribbon.ZonePreferenceServerListFilter",
+  "alb2.ILoadBalancer": "com.netflix.loadbalancer.ZoneAwareLoadBalancer",
+  "alb2.PingInterval": 30
+}
+```
 
 
 ### 4.1 Ribbon介绍
