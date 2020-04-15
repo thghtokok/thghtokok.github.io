@@ -1,3 +1,3 @@
 # thghtokok.github.io
 
-[README.md](./index.md)
+[我的学习笔记](./index.md)
