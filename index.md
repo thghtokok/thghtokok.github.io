@@ -9,6 +9,7 @@ MD文件
 * [Expect 学习](./md/expect学习.md)
 * [Mysql 索引规则](./md/Mysql索引规则.md)
 * [Lua 学习笔记](./md/Lua学习笔记.md)
+* [Vue.js 的学习](./md/vue_js.md)
 
 PDF文件
 ---
@@ -19,3 +20,13 @@ HTML文件
 ---
 
 * [Oops.html(有彩蛋)](./oops.html)
+
+读书笔记
+---
+
+* [增长黑客](./doc/20200512.md)
+
+有时间看看
+---
+
+* JMH 微基准测试套件
