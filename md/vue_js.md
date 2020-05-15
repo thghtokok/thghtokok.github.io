@@ -1,15 +1,238 @@
 # Vue.js 
 
+## 钩子
+
+### 钩子函数
+
+指令定义函数提供了几个钩子函数( 可选 ):
+* bind: 只调用一次, 指令第一次绑定到元素时调用, 用这个钩子函数可以定义一个在绑定时执行一次的初始化动作.
+* inserted: 被绑定元素插入父节点时调用( 父节点存在即可调用, 不必存在于document中)
+* update: 被绑定元素所在的模板更新时调用, 而不论绑定值是否变化. 通过比较更新前后的绑定值, 可以忽略不必要的模板更新
+* componentUpdated: 被绑定元素所在模板完成一次更新周期时调用
+* unbind: 只调用一次, 指令与元素解绑时调用
+
+### 钩子函数参数
+
+* el: 指令所绑定的元素, 可以用来直接操作DOM.
+* binding: 一个对象, 包含以下属性:
+  * name: 指令名, 不包括 v- 前缀
+  * value: 指令的绑定值, 例如: v-my-directive="1+1", value的值是2
+  * oldValue: 指令绑定的前一个值, 仅在update 和 componentUpdated 钩子中可用. 无论值是否改变都可用.
+  * expression: 绑定值的表达式或变量名. 例如 v-my-directive="1+1", expression的值是 "1+1"
+  * arg: 传给指令的参数. 例如 v-my-directive:foo,  arg的值是 "foo"
+  * modifiers: 一个包含修饰符的对象. 例如: v-my-directive.foo.bar,  修饰父对象 modifiers 的值是 {foo:true, bar:true}
+* vnode: Vue编译生成的虚拟节点
+* oldVnode: 上一个虚拟节点, 仅在 update 和 componentUpdated 钩子中可用
+
+### 简单写法
+
+```js
+<div v-runoob2="{color:'red',text:'啊啊啊啊啊啊阿'}"></div>
+
+    'runoob2': function (el, binding) {
+      // 设置指令的背景颜色
+      el.style.backgroundColor = binding.value.color
+      // 设置文字
+      el.innerHTML = binding.value.text + binding.value.color
+    }
+```
+
+## 自定义指令
+
+* 除了 v-model 和 v-show, Vue允许注册自定义指令
+* 自定义 v-focus 在页面加载时, 元素获得焦点
+
+```js
+<input v-model.lazy="parentArg1" v-focus />
+
+  // 自定义指令
+  directives: {
+    'focus': {
+      // 当绑定元素插入到DOM中.
+      inserted: function (el) {
+        // 聚焦元素
+        el.focus()
+      }
+    }
+  },
+
+```
+
+## 组件
+
+* 功能强大
+* 扩展HTML元素, 封装可复用的代码
+* 用独立可复用的小组件, 来构建大型应用
+
+* 注册一个全局组件的语法格式如下
+
+```js
+Vue.component(tagName,options)
+```
+
+* tagName 是组件名
+* options 为配置选项
+
+```html
+<!-- 使用方法 -->
+<tagName></tagName>
+```
+
+### 全局组件
+
+```html
+<guohaitaowansui />
+
+Vue.component('guohaitaowansui', {
+  template: '<h1>郭海涛万岁!</h1>'
+})
+```
+
+### 局部组件
+
+* 无意中发现了 局部组件的一个有趣的地方. 我们可以把局部组件定义成 .vue 文件, 类似于java的类, 然后我们用import 引入这个类, 就可直接使用了 奈斯
+
+### Prop
+
+* 子组件用来接收父组件传递过来的数据的一个自定义属性
+
+```js
+<proptest arg1="郭海涛" arg2="王庚"></proptest>
+
+components: {
+    'proptest': {
+      // 声明 props
+      props: ['arg1', 'arg2'],
+      template: '<span>{{arg1}} 打败了 {{arg2}}</span>'
+    }
+}
+```
+
+* 相当于套用, 页面上只需要写一个标签, 但是这个标签下面还带着很多子标签, 通过传入参数的方式, 决定子标签的显示内容
+
+### 动态Prop
+
+```html
+    <input v-model.lazy="parentArg1" />
+    <br />
+    <proptest v-bind:arg1="parentArg1" arg2="王庚"></proptest>
+```
+
+* prop 是单向绑定: 父组件的属性变化时, 将传递给子组件,  但不会从子传给父
+
+### Prop 验证
+
+```js
+components:{
+    "propYanZheng":{
+        props:{
+            // 基础的类型检查(`null` 和 `undefined`会通过任何类型的验证 o(╯□╰)o)
+            propA:Number,
+            // 多个可能的类型
+            propB:[String,Number],
+            // 必填的字符串
+            propC:{
+                type:String,
+                required:true
+            },
+            // 带有默认值的数字
+            propD:{
+                type:Number,
+                default: 100
+            },
+            // 带有默认值的对象
+            propE: {
+                // 对象或数组默认值必须从一个工厂函数获取
+                default: function(){
+                    return {message:"hello"}
+                }
+            },
+            // 自定义验证函数
+            propF:{
+                validator:funcion(value){
+                    // 这个值必须匹配下列字符串中的一个
+                    return ["success","warning","danger"].indexOf(value)!== -1 
+                }
+            }
+
+        }
+    }
+}
+
+```
+
+* prop 验证失败 Vue将产生一个控制台的警告.
+* type 
+  * String
+  * Number
+  * Boolean
+  * Array
+  * Object
+  * Date
+  * Function
+  * Symbol
+  * 也可以是自定义构造器, 使用 instanceof 检验
+
+### 自定义事件
+
+* 父组件通过props传递数据给子组件
+* 子组件通过 自定义事件 将数据 传递给 父组件
+* 可使用 v-on 绑定自定义事件, Vue实例都实现了事件接口
+  * 使用 $on(eventName) 监听事件
+  * 使用 $emit(eventName) 触发事件
+* 父组件可以在使用子组件的地方直接使用 v-on 来监听子组件触发的事件
+
+```js
+// 一波操作猛如虎  代码片段
+    <p>{{total}}</p>
+    <button-counter v-on:increment="incrementTotal"></button-counter>
+    <button-counter v-on:increment="incrementTotal"></button-counter>
+
+'button-counter': {
+      template: "<button v-on:click='incrementHandler'>{{counter}}</button>",
+      data: function () {
+        return {
+          counter: 0
+        }
+      },
+      methods: {
+        incrementHandler: function () {
+          this.counter += 1
+          this.$emit('increment')
+        }
+      }
+    }    
+
+
+    incrementTotal: function () {
+      this.total += 1
+    }
+```
+
+* 最后实现的结果是: 两个分别独立的按钮, 一个总数展示. 两个分别独立的按钮上数字的增加并不会相互影响. 但总数会去把他们之和展示出来
+
+监听原生事件, 使用 .native 修饰
+
+```html
+<my-component v-on:click.native="doTheThing"></my-component>>
+```
+
+* data 必须是一个函数
+  * 好处是, 每个实例可以维护一份被返回对象的独立的拷贝
+
 ## 表单
 
 * 可以用v-model指令在表单控件元素上创建双向数据绑定
 
+```
             ViewModel    
 View  →   DOM listeners  →    Model    
       ←   Data Bindings  ←    
 ↓              ↓                ↓   
 ↓              ↓                ↓   
 DOM           Vue      Plain JavaScript Object
+
+```
 
 * v-model 会根据控件类型自动选取正确的方式来更新元素
 
@@ -29,6 +252,80 @@ DOM           Vue      Plain JavaScript Object
 
 ### 复选框
 
+```html
+<div>
+      <p>单个复选框</p>
+      <input type="checkbox" id="checkbox" v-model="checked" />
+      <label for="checkbox">{{checked}}</label>
+
+      <p>多个复选框</p>
+      <input type="checkbox" id="runoob" value="Runoob" v-model="checkedNames" />
+      <label for="runoob">Runoob</label>
+      <input type="checkbox" id="google" value="Google" v-model="checkedNames" />
+      <label for="google">Google</label>
+      <input type="checkbox" id="taobao" value="Taobao" v-model="checkedNames" />
+      <label for="taobao">Taobao</label>
+      <br />
+      <span>选择的值为: {{checkedNames}}</span>
+    </div>
+```
+
+### 单选按钮
+
+```html
+<div>
+      <input type="radio" id="guohaitao" value="Guohaitao" v-model="picked" />
+      <label for="guohaitao">Guohaitao</label>
+      <input type="radio" id="wanggeng" value="Wanggeng" v-model="picked" />
+      <label for="wanggeng">Wanggeng</label>
+      <br />
+      <span>选中的值为:{{picked}}</span>
+    </div>
+```
+
+### select列表
+
+```html
+<div>
+      <select v-model="selected" name="fruit">
+        <option value>选择一个网站</option>
+        <option value="www.baidu.com">百度</option>
+        <option value="www.google.com">谷歌</option>
+      </select>
+      <div id="output">选择的网站是:{{selected}}</div>
+    </div>
+```
+
+### 修饰符
+
+* .lazy
+  * 默认时,v-model在input事件中同步输入框的值和数据
+  * 此修饰符 改为在 change 事件时同步
+
+```html
+      <p>input 元素:</p>
+      <input v-model.lazy="message" placeholder="编辑我..." />
+      <p>消息是: {{message}}</p>
+```
+
+* .number
+  * type="number" 很关键
+
+```html
+      <p>input 元素: 数字类型</p>
+      <input v-model.number="message3" type="number" placeholder="编辑我..." />
+      <p>消息是: {{message3}}</p>
+```
+
+* .trim
+  * 去掉输入的首尾空格
+
+```html
+      <p>input 元素:</p>
+      <input v-model.lazy.trim="message" placeholder="编辑我..." />
+      <p>消息是: {{message}}</p>
+
+```
 
 
 ## 事件处理器
