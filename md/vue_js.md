@@ -1,4 +1,79 @@
+# Vue瞎研究模式 [GOTO](doc/20200516001.md)
+
+# [Vue的学习目录 -> 简书](https://www.jianshu.com/p/dc5057e7ad0d)
+
+# [例子](doc/vue.html)
+
 # Vue.js 
+
+
+
+## 混入 
+
+[先跳过](https://www.runoob.com/vue2/vue-mixins.html)
+
+
+## 过渡 & 动画
+
+### 过渡
+
+* 插入, 更新 或 移除 DOM 时, 提供多种不同方式的应用过渡效果
+* 提供了内置的过渡封装组件, 该组件用于包裹要实现过渡效果的组件
+
+语法格式:
+
+```html
+<transition name="nameoftransition">
+    <div></div>
+</transition>
+```
+
+* Vue提供了6个class
+  * v-enter: 定义进入过渡的开始状态. 在元素被插入之前生效, 在元素被插入之后的下一帧移除.
+  * v-enter-active: 定义进入过渡生效时的状态. 在整个进入过渡的阶段中应用, 在元素插入之前生效, 在过渡/动画完成之后移除. 这个类可以被用来定义进入过渡的过渡时间, 延迟和曲线函数
+  * v-enter-to: 2.1.8版本及以上 定义进入过渡的结束状态. 在元素被插入之后下一帧生效(同时 v-enter 被移除), 在过渡/动画完成之后移除
+  * v-leave: 定义离开过渡的开始状态. 在离开过渡被触发时立刻生效, 下一帧被移除.
+  * v-leave-active: 定义离开过渡生效时的状态. 在整个离开过渡的阶段中应用, 在离开过渡被触发时立刻生效, 在过渡/动画完成之后移除. 这个类可以被用来定义离开过渡的过渡时间, 延迟和曲线函数.
+  * v-leave-to: 2.1.8及以后, 定义离开过渡的结束状态. 在离开过渡被处罚之后下一帧生效( 同时 v-leave 被移除 ), 在过渡/动画完成之后移除.
+
+* 没有名字的 transition ,则 v- 是这个类的默认前缀. 如果有名字, 那么 v-  被替换为  名字
+  * 例如: `<transition name="aaa"></transition>` v-enter 被替换为 aaa-enter
+
+### CSS过渡
+
+### CSS动画
+
+CSS动画类似CSS过渡, 但是动画中 v-enter 类在节点插入DOM后不会立即删除, 而是在 animationend 事件触发时 删除
+
+### 自定义过渡的类名
+
+可以通过以下特性来自定义过渡类名:
+* enter-class
+* enter-active-class
+* enter-to-class(2.1.8+)
+* leave-class
+* leave-active-class
+* leave-to-class(2.1.8+)
+
+* 自定义的类名 优先级 高于普通的类名
+* 第三方动画库   animate.css
+
+[动画这块还有很多,先跳过,之后再看](https://www.runoob.com/vue2/vue-transitions.html)
+
+## 路由
+
+* 通过不同的URL访问不同的内容
+* 实现多视图的单页Web应用
+* 路由需要载入   [vue-router库](https://router.vuejs.org/zh/)
+
+```shell
+$ cnpm install vue-router
+```
+
+* `<router-link>` 组件, 用于设置一个导航链接, 切换不同的HTML内容
+* to 属性为目标地址, 即要显示的内容
+
+* !!! 这里没有看明白, 先略过, 回头看看前人写的项目再说
 
 ## 钩子
 
