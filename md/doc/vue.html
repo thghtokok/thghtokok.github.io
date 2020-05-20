@@ -12,12 +12,22 @@
     <div id="app">
         {{message}}
     </div>
+    <div id="app1">
+        <span v-bind:title="message">鼠标悬停几秒后看效果</span>
+    </div>
 
     <script>
         var app = new Vue({
             el: "#app",
             data: {
                 message: "Hello Vue!"
+            }
+        })
+
+        var app1 = new Vue({
+            el: "#app1",
+            data: {
+                message: "Hello Vue!" + new Date().toLocaleString()
             }
         })
 
