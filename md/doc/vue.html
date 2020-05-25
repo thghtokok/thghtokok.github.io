@@ -11,16 +11,49 @@
 <body>
     <div id="app">
         {{message}}
+        <p>Using mustaches: {{htmlStr}}</p>
+        <p>Using v-html mustaches: <span v-html="htmlStr"></span></p>
     </div>
     <div id="app1">
         <span v-bind:title="message">鼠标悬停几秒后看效果</span>
     </div>
+    <div id="app2">
+        <p v-if="seen">现在你看到我了</p>
+    </div>
+    <div id="app3">
+        <ol>
+            <li v-for="todo in todos">
+                {{todo.text}}
+            </li>
+        </ol>
+        <hr>
+        <ol>
+            <todo-item v-for="item,index in todos" v-bind:todo="item" v-bind:key="index"></todo-item>
+        </ol>
+    </div>
+    <div id="app4">
+        <p>{{message}}</p>
+        <button v-on:click="reverseMessage">反转消息</button>
+    </div>
+    <div id="app5">
+        <input v-model="message" />
+        <p>Original message: "{{message}}"</p>
+        <p>Computed reversed message: "{{reverseMessage}}"</p>
+    </div>
 
-    <script>
+    <script type="text/javascript">
+
+        /** 先定义在使用 */
+        Vue.component('todo-item', {
+            props: ["todo"],
+            template: "<li>{{todo.text}}</li>"
+        })
+
         var app = new Vue({
             el: "#app",
             data: {
-                message: "Hello Vue!"
+                message: "Hello Vue!",
+                htmlStr: "<span style='color:red'>This should be red.</span>"
             }
         })
 
@@ -30,6 +63,51 @@
                 message: "Hello Vue!" + new Date().toLocaleString()
             }
         })
+
+        var app2 = new Vue({
+            el: "#app2",
+            data: {
+                seen: false
+            }
+        })
+
+        var app3 = new Vue({
+            el: "#app3",
+            data: {
+                todos: [
+                    { text: "王庚" },
+                    { text: "郭海涛" },
+                    { text: "秦始皇" },
+                    { text: "唐明皇" },
+                ]
+            }
+        })
+
+        var app4 = new Vue({
+            el: "#app4",
+            data: {
+                message: "郭海涛万岁!!"
+            },
+            methods: {
+                reverseMessage: function () {
+                    this.message = this.message.split("").reverse().join("")
+                }
+            }
+        })
+
+
+        var app5 = new Vue({
+            el: "#app5",
+            data: {
+                message: "郭海涛万岁!!"
+            },
+            computed: {
+                reverseMessage: function () {
+                    return this.message.split("").reverse().join("")
+                }
+            }
+        })
+
 
     </script>
 </body>
