@@ -6,3 +6,10 @@
 * [学习案例](doc/vue.html)
 
 # [Vue.js 菜鸟教程 学习笔记](doc/20200521001.md)
+
+# [keyCode 对照表](doc/keyCode.md)
+
+# 继续学习列表
+
+## [element标签](https://element.eleme.cn/#/zh-CN/component/installation)
+## [Vue 与 Ajax]()

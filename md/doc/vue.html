@@ -10,6 +10,8 @@
 
 <body>
     <div id="app">
+        <h1 v-if="true"> Vue is awesome! </h1>
+        <h1 v-else> Oh no o(╥﹏╥)o </h1>
         {{message}}
         <p>Using mustaches: {{htmlStr}}</p>
         <p>Using v-html mustaches: <span v-html="htmlStr"></span></p>
@@ -33,12 +35,40 @@
     </div>
     <div id="app4">
         <p>{{message}}</p>
-        <button v-on:click="reverseMessage">反转消息</button>
+        <button v-on:click="reverseMessage($event)">反转消息</button>
     </div>
     <div id="app5">
         <input v-model="message" />
         <p>Original message: "{{message}}"</p>
         <p>Computed reversed message: "{{reverseMessage}}"</p>
+    </div>
+
+    <div id="app_1">
+        <template v-if="loginType==='username'">
+            <label>Username</label>
+            <input placeholder="输入 用户名" v-on:keyup.alt.81="qiehuan" />
+        </template>
+        <template v-else>
+            <label>Email</label>
+            <input placeholder="输入 邮箱" v-on:keyup.alt.81="qiehuan" />
+        </template>
+        <br>
+        <template v-if="loginType==='username'">
+            <label>Username</label>
+            <input placeholder="输入 用户名" key="username-input" />
+        </template>
+        <template v-else>
+            <label>Email</label>
+            <input placeholder="输入 邮箱" key="email-input" />
+        </template>
+
+        <button v-on:click="qiehuan">切换类型</button>
+    </div>
+
+    <div id="app_2">
+        <ol>
+            <li v-for="n in evenNumbers" v-bind:key="n">{{n}}</li>
+        </ol>
     </div>
 
     <script type="text/javascript">
@@ -48,6 +78,43 @@
             props: ["todo"],
             template: "<li>{{todo.text}}</li>"
         })
+
+        var app_2 = new Vue({
+            el: "#app_2",
+            data: {
+                numbers: [1, 2, 3, 4, 5, 6, 7, 8]
+            },
+            computed: {
+                evenNumbers: function () {
+                    return this.numbers.filter(function (number) {
+                        return number % 2 === 0
+                    })
+                }
+            }
+        })
+
+        var app_1 = new Vue({
+            el: "#app_1",
+            data: {
+                loginType: "username"
+            },
+            methods: {
+                qiehuan(event) {
+                    // `this` 在方法里指向当前Vue实例
+                    console.log("loginType: " + this.loginType + "!")
+                    // `event` 是原生 DOM 事件
+                    if (event) {
+                        console.log(event.target.tagName)
+                    }
+                    if (this.loginType === "username") {
+                        this.loginType = "email"
+                    } else {
+                        this.loginType = "username"
+                    }
+                }
+            }
+        })
+
 
         var app = new Vue({
             el: "#app",
@@ -89,7 +156,8 @@
                 message: "郭海涛万岁!!"
             },
             methods: {
-                reverseMessage: function () {
+                reverseMessage: function (event) {
+                    console.log(event)
                     this.message = this.message.split("").reverse().join("")
                 }
             }
