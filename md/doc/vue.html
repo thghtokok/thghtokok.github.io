@@ -37,11 +37,7 @@
         <p>{{message}}</p>
         <button v-on:click="reverseMessage($event)">反转消息</button>
     </div>
-    <div id="app5">
-        <input v-model="message" />
-        <p>Original message: "{{message}}"</p>
-        <p>Computed reversed message: "{{reverseMessage}}"</p>
-    </div>
+
 
     <div id="app_1">
         <template v-if="loginType==='username'">
@@ -71,12 +67,145 @@
         </ol>
     </div>
 
+    <div id="app5">
+        <h3>文本</h3>
+        <input v-model="message" placeholder="edit me" />
+        <p>Original message: "{{message}}"</p>
+        <p>Computed reversed message: "{{reverseMessage}}"</p>
+
+        <h3>多行文本</h3>
+        <span>多行文本:</span>
+        <p style="white-space: pre-line;">{{multilineMessage}}</p>
+        <br>
+        <textarea v-model="multilineMessage" placeholder="添加多行文本"></textarea>
+
+        <h3>选择框</h3>
+        <h4>单选</h4>
+        <select v-model="selected">
+            <option disabled value="">请选择</option>
+            <option>Apple</option>
+            <option>Body</option>
+            <option value="汤姆猫">Cat</option>
+        </select>
+        <span>选择了: {{selected}}</span>
+        <h4>多选</h4>
+        <select v-model="selectArray" multiple style="width: 250px;">
+            <option v-for="option in options" v-bind:value="option.value">
+                {{option.text}}
+            </option>
+        </select>
+
+        <span>选择了: {{selectArray}}</span>
+
+        <h3>值绑定</h3>
+        <input type="checkbox" v-model="toggle" true-value="yes" false-value="大威天龙">
+        <span>{{toggle}}</span>
+
+        <hr>
+        <button-counter></button-counter>
+
+        <div :style="{fontSize: postFontSize + 'em'}">
+            <blog-post v-for="post in options" v-bind:key="post.value" v-bind:post="post"
+                v-on:enlarge-text="onEnlargeText">啊啊啊啊啊啊啊啊啊啊啊啊啊啊</blog-post>
+        </div>
+        <custom-input v-model="searchText" required placeholder="Enter your search text"></custom-input>
+        <span>{{searchText}}</span>
+        <br>
+        <custom-input2 v-bind:labelValue.sync="labelValue" required placeholder="Enter your search text">
+        </custom-input2>
+        <span>{{labelValue}} 没有实现</span>
+        <br>
+        <custom-input2 v-bind:labelValue="labelValue" v-on:update:labelValue="labelValue=$event" required
+            placeholder="Enter your search text">
+        </custom-input2>
+        <span>{{labelValue}} 没有实现</span>
+    </div>
+
     <script type="text/javascript">
 
         /** 先定义在使用 */
         Vue.component('todo-item', {
             props: ["todo"],
             template: "<li>{{todo.text}}</li>"
+        })
+
+        Vue.component('button-counter', {
+            data: function () {
+                return {
+                    count: 0
+                }
+            },
+            template: '<button v-on:click="count++">你点了{{count}}次.</button>'
+        })
+
+        Vue.component('blog-post', {
+            props: ['post'],
+            template: `
+            <div class="blog-post"> 
+                <h3>{{post.value}}</h3>
+                <button v-on:click="$emit('enlarge-text',0.1)"> Enlarge Text </button>
+                <div v-html="post.text"></div>
+                <slot></slot>
+            </div>
+            `
+        })
+
+        // 让v-model用在组件上
+        Vue.component('custom-input', {
+            inheritAttrs: false,
+            props: ['label', 'value'],
+            template: `
+            <label>
+                {{label}}
+            <input
+                v-bind="$attrs"
+                v-bind:value="value"
+                v-on:input="$emit('input',$event.target.value)"
+            >
+            </label>
+            `
+        })
+
+        // 让v-model用在组件上
+        Vue.component('custom-input2', {
+            inheritAttrs: false,
+            props: ['label', 'value'],
+            template: `
+            <label>
+                {{label}}
+            <input
+                v-bind="$attrs"
+                v-bind:value="value"
+                v-on:input="$emit('update:labelValue',$event.target.value)"
+            >
+            </label>
+            `
+        })
+
+
+        var app5 = new Vue({
+            el: "#app5",
+            data: {
+                message: "郭海涛万岁!!",
+                multilineMessage: "",
+                selected: "",
+                selectArray: [],
+                options: [{ text: "Apple", value: "A" }, { text: "Body", value: "B" }, { text: "Cat", value: "C" }],
+                toggle: "",
+                postFontSize: 1,
+                searchText: "",
+                labelValue: ""
+            },
+            methods: {
+                onEnlargeText: function (enlargeAmount) {
+                    this.postFontSize += enlargeAmount
+                }
+            },
+            computed: {
+                reverseMessage: function () {
+                    return this.message.split("").reverse().join("")
+                }
+            }
         })
 
         var app_2 = new Vue({
@@ -164,17 +293,7 @@
         })
 
 
-        var app5 = new Vue({
-            el: "#app5",
-            data: {
-                message: "郭海涛万岁!!"
-            },
-            computed: {
-                reverseMessage: function () {
-                    return this.message.split("").reverse().join("")
-                }
-            }
-        })
+
 
 
     </script>

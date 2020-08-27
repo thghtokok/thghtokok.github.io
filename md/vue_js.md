@@ -11,5 +11,17 @@
 
 # 继续学习列表
 
+## Node Package Manager (NPM)
+
+## Modern JavaScript with ES2015/16
+* [ECMAScript 6入门](http://caibaojian.com/es6/README_about.html)
+
 ## [element标签](https://element.eleme.cn/#/zh-CN/component/installation)
+
 ## [Vue 与 Ajax]()
+
+## [Kbone UI](https://mp.weixin.qq.com/s/tyfhujtiJQc1_oB4OffKsA)
+* [GOTO](https://github.com/wechat-miniprogram/kbone-ui)
+
+
+
