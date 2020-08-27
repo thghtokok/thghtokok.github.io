@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <title>Oops!</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="/saolei/saolei.css" />
+  <script src="/jquery/jquery-2.2.4.min.js"></script>
+  <script src="/bootstrap/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+  <div class="jumbotron row">
+    <div class="col-md-3  col-md-offset-1">
+      <img id="kaishi" src="/img/Oops.png" class="img-rounded" />
+    </div>
+    <div class="col-md-8">
+      <h2>
+        您请求的页面似乎有问题!
+      </h2>
+      <p id="path"></p>
+      <p id="timet"></p>
+      <div id="game" style="display: none;">
+        <div id="map" style="display: none;">
+          <div id="message">
+            <p id="leiNumP">雷: <b id='leiNum'></b> </p>
+          </div>
+          <button id="zailaiyiju" style="display: none;">再来一局</button>
+        </div>
+        <div id="create">
+          <input class="select" id="num3" type='radio' name='select' value='1' checked="checked" /> <label for='num3'>初级
+            [ X =
+            9
+            , Y = 9 , 雷 = 10 ] </label><br />
+          <input class="select" id='num4' type='radio' name='select' value='2' /> <label for='num4'>中级 [ X = 16 , Y = 16
+            , 雷
+            =
+            40 ]</label><br />
+          <input class="select" id='num5' type='radio' name='select' value='3' /> <label for='num5'>高级 [ X = 30 , Y = 16
+            , 雷
+            =
+            99 ]</label><br />
+          <input class="select" id='num6' type='radio' name='select' value='4' disabled="disabled" /> <label
+            for='num6'>自定义
+            [尽情期待]</label><br />
+          <button id="createSaoLei">创建</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    $(function () {
+      $("#path").text("URL: " + window.location.href);
+      $("#timet").text("时间: " + new Date());
+    });
+  </script>
+
+  <script src="/saolei/saolei-object.js"></script>
+  <script src="/saolei/saolei.js"></script>
+
+
+</body>
+
+</html>
