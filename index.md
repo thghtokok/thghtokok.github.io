@@ -12,6 +12,8 @@ MD文件
 * [Lua 学习笔记](./md/Lua学习笔记.md)
 * [Vue.js 的学习](./md/vue_js.md)
 * [MyBatis](./md/MyBatis.md)
+* [Redis的学习](./md/redis.md)
+* [前端小知识](./md/frontEnd.md)
 
 ### 正道的光
 
