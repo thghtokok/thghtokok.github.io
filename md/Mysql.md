@@ -2,3 +2,4 @@
 
 * [Mysql 索引规则](./Mysql索引规则.md)
 * [Mysql 数据库字段类型详解](./Mysql字段类型.md)
+* [MySQL Explain详解](./doc/202101190001.md)
