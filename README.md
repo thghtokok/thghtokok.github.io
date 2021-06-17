@@ -2,4 +2,4 @@
 
 MarkDown 很不错, 以后的学习笔记都放在这里
 
-[我的学习笔记](./index.md)
+[我的学习笔记](./docs/index.md)
