@@ -13,7 +13,6 @@
         </dependency>
 ```
 
-
 # Mybatis-spring-boot-starter
 
 [学习地址](http://www.mybatis.cn/archives/861.html)
@@ -41,10 +40,6 @@
 添加位置: SpringBoot启动类
 多个包时, 用大括号, 以逗号分隔
 
-
-
-
-
 # MyBatis 学习笔记
 
 [学习地址](https://mybatis.org/mybatis-3/zh/index.html)
@@ -52,27 +47,28 @@
 ## Java API
 
 注解               | 使用对象 | XML等价形式  | 描述
-*  @CacheNamespace    | 类       | cache 
-   *  为给定的命名空间(比如类)配置缓存. 
-   *  属性: 
-      *  implementation, 
-      * eviction, 
-      * flushInterval, 
-      * size, 
-      * readWrite, 
-      * blocking, 
-      * properties.
-* @property          | N/A      | property 
+
+* @CacheNamespace    | 类       | cache
+  * 为给定的命名空间(比如类)配置缓存.
+  * 属性:
+    * implementation,
+    * eviction,
+    * flushInterval,
+    * size,
+    * readWrite,
+    * blocking,
+    * properties.
+* @property          | N/A      | property
   * 指定参数值或定位符(placeholder), 该占位符能被mybatis-config.xml内的配置属性替换,  (3.4.2以上可用)
-  * 属性: 
-    * name, 
-    * value 
+  * 属性:
+    * name,
+    * value
 * @CacheNamespaceRef | 类       | cacheRef
-  * 引用另一个命名空间的缓存以供使用. 
-  * 注意: 使用共享相同的全限定类名, 在XML映射文件中声明的缓存仍被是被为一个独立的命名空间, 
+  * 引用另一个命名空间的缓存以供使用.
+  * 注意: 使用共享相同的全限定类名, 在XML映射文件中声明的缓存仍被是被为一个独立的命名空间,
   * 属性: 如果你使用了这个注解, 应该设置value或者name属性的其中一个.
-    * value 属性用于指定能够表示该命名空间的Java类型(命名空间名就是Java类型的全限定类名) 
-    * name 属性(3.4.2以上可用)则直接制定了命名空间的名字 
+    * value 属性用于指定能够表示该命名空间的Java类型(命名空间名就是Java类型的全限定类名)
+    * name 属性(3.4.2以上可用)则直接制定了命名空间的名字
 * @ConstructorArgs | 方法 | constructor
   * 收集一组结果以传递给一个结果对象的构造方法
   * 属性:
@@ -80,7 +76,7 @@
 * @Arg | N/A | arg   idArg
   * ConstructorArg 集合的一部分, 代表一个构造方法参数  3.5.4开始, 该注解可以重复注解
   * 属性:
-    * id   与XML idArg相似, 是一个布尔值, 表示该属性是否用于唯一标识和比较对象 
+    * id   与XML idArg相似, 是一个布尔值, 表示该属性是否用于唯一标识和比较对象
     * column
     * javaType
     * jdbcType
@@ -89,7 +85,7 @@
     * resultMap
 * @TypeDiscriminator | 方法| discriminator
   * 决定使用何种结果映射的一组取值(case)
-  * 属性: 
+  * 属性:
     * column
     * javaType
     * jdbcType
@@ -100,7 +96,7 @@
   * 属性:
     * value
     * type
-    * results 一个Results的数组, 
+    * results 一个Results的数组,
 * @Results | 方法 | resultMap
   * 一个结果映射, 指定了对某个特定结果列, 映射到某个属性或字段的方法,  3.5.4开始, 可重复注解
   * 属性:
@@ -108,9 +104,9 @@
     * id  是结果映射的名称
 * @Result | N/A | result   id
   * 在列和属性或字段之间的单个结果映射
-  * 属性: 
-    * id    与XML id相似 
-    * column   
+  * 属性:
+    * id    与XML id相似
+    * column
     * javaType
     * jdbcType
     * typeHandler
@@ -121,7 +117,7 @@
   * 属性:
     * select 指定可加载合适类型实例的映射语句(也就是映射器方法) 全限定名
     * fetchType  指定在该映射中覆盖全局配置参数 lazyLoadingEnabied
-    * resultMap 
+    * resultMap
     * columnPrefix
 * @Many | N/A | collection
   * 属性:
@@ -129,15 +125,15 @@
     * fetchType
     * resultMap
     * columnPrefix
-* @MapKey | 方法 | 
-  * 供返回值为Map的方法使用的注解.  他是用对象的某个属性座位key, 将对象List转化为Map. 
+* @MapKey | 方法 |
+  * 供返回值为Map的方法使用的注解.  他是用对象的某个属性座位key, 将对象List转化为Map.
   * 属性:
     * value 指定座位Map的Key值的属性名
-* @Options | 方法 | 映射语句的属性 
-  * 该注解允许你指定大部分开关和配置选项, 通常在映射语句上作为属性出现. 
+* @Options | 方法 | 映射语句的属性
+  * 该注解允许你指定大部分开关和配置选项, 通常在映射语句上作为属性出现.
   * 提供了一致, 清晰的方式来指定选项
   * 注意: Java注解无法指定null值,因此, 一旦使用了Options注解, 语句就会被属性的默认值影响.
-  * 属性: 
+  * 属性:
     * userCache=true
     * flushCache=FlushCachePolicy.DEFAULT
     * resultSet=DEFAULT
@@ -146,24 +142,24 @@
     * timeout=-1
     * useGeneratedKeys=false
     * keyProperty=""
-    * keyColumn=""     只在部分数据库中有效, 如 Oracle 和 PostgreSQL 
+    * keyColumn=""     只在部分数据库中有效, 如 Oracle 和 PostgreSQL
     * resultSets=""
     * databaseId=""
 * @Insert @Update @Delete @Select | 方法 | insert update delete select
-  * 分别代表将会执行的SQL语句. 
-  * 用字符串数组(或单个字符串)作为参数. 
+  * 分别代表将会执行的SQL语句.
+  * 用字符串数组(或单个字符串)作为参数.
   * 如果传递字符串数组, 字符串数组会被连接成单个完整的字符串, 每个字符串之间加入一个空格. 以避免"丢失空格"问题
   * 属性 :
     * value 指定用来组成单个SQL语句的字符串素组
     * databaseId:  3.5.5
 * @InsertProvider @UpdateProvider @DeleteProvider @SelectProvider | 方法 | insert update delete select
-  * 允许构建动态SQL, 
+  * 允许构建动态SQL,
   * 没看懂
 * @Param | 参数| N/A
   * 如果你的映射方法接受多个参数, 就可以使用这个注解自定义每个参数的名字. 否则在默认情况下, 出RowBounds以外的参数会以"param"加参数位置被命名. 例如: #{param1},#{param2}. 如果使用了 @param("person"), 参数就会被命名为 #{person}
 * @SelectKey | 方法 | selectKey
   * 与XML selectKey 完全一致, 只能在 @Insert , @InsertProvider , @Update 或 @UpdateProvider标注的方法上只用, 否则会被忽视.
-  * 标注了@SelectKey注解, Mybatis将忽视@Options注解所设置的生成主键或设置(configuration)属性. 
+  * 标注了@SelectKey注解, Mybatis将忽视@Options注解所设置的生成主键或设置(configuration)属性.
   * 属性:
     * statement 以字符串数组形式指定将被执行的SQL语句
     * keyProperty 执行座位参数传入的对象对应属性的名称, 该属性将会更新成新的值
@@ -174,15 +170,13 @@
 * @ResultMap | 方法| N/A
   * 为@Select 或 @SelectProvider注解自定XML映射中`<resultMap>`元素的id
 * @ResultType
-  * 
+  *
 * @Flush | 方法 | N/A
   * 定义Mapper接口中的方法能够调用 SqlSession#flushStatements()方法 3.3以上可用
 
-
-
 ## 动态SQL
 
-### if 
+### if
 
 ### choose , when , otherwise    相当于switch
 
@@ -220,7 +214,6 @@ UPDATE Auther
 WHERE id = #{id}
 </update>
 ```
-
 
 ### foreach 对集合进行遍历
 
@@ -265,16 +258,15 @@ WHERE id = #{id}
 
 缓存只作用于 cache 标签所在的映射文件中的语句, 如果混合使用 Java API 和 XML 映射文件, 在共享几口中的语句将不会被默认缓存, 需要使用 @CacheNamespaceRef 注解指定缓存作用域
 
-
 ## 入门
 
 ### 安装
 
 ```xml
 <dependency>
-	<groupId>org.mybatis</groupId>
-	<artifactId>mybatis</artifactId>
-	<version>3.5.4</version>
+ <groupId>org.mybatis</groupId>
+ <artifactId>mybatis</artifactId>
+ <version>3.5.4</version>
 </dependency>
 ```
 
@@ -288,7 +280,7 @@ WHERE id = #{id}
 
 ## XML配置
 
-3.4.2 启用默认值: 
+3.4.2 启用默认值:
 
 org.apache.ibatis.parsing.PropertyParser.enable-default-value true启动默认值特性
 
@@ -395,6 +387,7 @@ SQL映射文件的顶级元素
 | typeHandler | 类型处理器,                           |
 
 ### 支持的JDBC类型
+
 | JDBC类型      | 对应Java类型         | 说明                             |
 | ------------- | -------------------- | -------------------------------- |
 | VARCHAR       | java.lang.String     |
@@ -429,8 +422,6 @@ SQL映射文件的顶级元素
 | NULL          |
 | NVARCHAR      |
 | UNDEFINED     |
-
-
 
 ## 简介
 

@@ -18,6 +18,7 @@ MD文件
 * [Retrofit2 的学习](./md/Retrofit2.md)
 * [libgdx 学习](./md/libgdx.md)
 * [Java 持续学习](./md/java.md)
+* [Python 的学习](./md/python.md)
 
 ### 正道的光
 
